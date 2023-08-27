@@ -1,0 +1,1 @@
+1. create-react-app uses webpack behind the scenes , webpack is similar to parcel which acts as bundler
