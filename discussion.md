@@ -6,3 +6,5 @@
 2. configured talwind css into our project
 3. Created basic componenets
 4. Added Routing using react-router-dom
+5. Login / Signup page
+6. form validation using useRef() hook
