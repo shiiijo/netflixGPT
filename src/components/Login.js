@@ -6,6 +6,7 @@ import { validateFormData } from "../utils/validate.js";
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState(null);
+  const name = React.useRef(null);
   const email = React.useRef(null);
   const password = React.useRef(null);
 
@@ -13,26 +14,19 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
 
-  const handleSignIn = () => {
+  const handleSubmit = () => {
     // data validation
     const validationMessage = validateFormData(
       email.current.value,
       password.current.value
     );
-    errorMessage !== "ok" && setErrorMessage(validationMessage);
-
-    //sign-in
-  };
-
-  const handleSignUp = () => {
-    // data validation
-    const validationMessage = validateFormData(
-      email.current.value,
-      password.current.value
-    );
-    errorMessage !== "ok" && setErrorMessage(validationMessage);
-
-    // sign-up
+    console.log(validationMessage);
+    if (validationMessage !== "ok") {
+      setErrorMessage(validationMessage);
+    } else {
+      setErrorMessage(null);
+    }
+    //sign-in & sign-up
   };
 
   return (
@@ -43,94 +37,54 @@ const Login = () => {
         alt="logo"
         className="absolute"
       />
-      {isSignInForm ? (
-        <form
-          className="bg-black absolute p-12 text-white bg-opacity-80 mx-auto right-0 left-0 my-36 w-1/4 rounded-md"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <h1 className="font-semibold text-3xl my-6">Sign In</h1>
-          <p className="text-lg text-red-500 font-semibold">{errorMessage}</p>
+      <form
+        className="bg-black absolute p-12 text-white bg-opacity-80 mx-auto right-0 left-0 my-36 w-1/4 rounded-md"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <h1 className="font-semibold text-3xl my-6">
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </h1>
+        <p className="text-lg text-red-500 font-semibold">{errorMessage}</p>
+        {!isSignInForm && (
           <input
-            ref={email}
-            type="text"
-            className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
-            placeholder="Email or phone number"
-          ></input>
-          <input
-            ref={password}
-            type="password"
-            className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
-            placeholder="Password"
-          ></input>
-          <button
-            className="bg-red-700 p-2 my-6 w-full rounded-lg"
-            onClick={() => handleSignIn()}
-          >
-            Sign In
-          </button>
-          <p>
-            New to Netflix?{" "}
-            <Link
-              className="underline"
-              onClick={() => {
-                toggleToSignUp();
-                setErrorMessage(null);
-              }}
-            >
-              Sign up now.
-            </Link>
-          </p>
-        </form>
-      ) : (
-        <form
-          className="bg-black absolute p-12 text-white bg-opacity-80 mx-auto right-0 left-0 my-36 w-1/4 rounded-md"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <h1 className="font-semibold text-3xl my-6">Sign Up</h1>
-          <p className="text-lg text-red-500 font-semibold">{errorMessage}</p>
-          <input
+            ref={name}
             type="text"
             className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
             placeholder="Full name"
           ></input>
-          <input
-            ref={email}
-            type="text"
-            className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
-            placeholder="Email or phone number"
-          ></input>
-          <input
-            ref={password}
-            type="password"
-            className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
-            placeholder="Password"
-          ></input>
-          <button
-            className="bg-red-700 p-2 my-6 w-full rounded-lg"
+        )}
+        <input
+          ref={email}
+          type="text"
+          className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
+          placeholder="Email or phone number"
+        ></input>
+        <input
+          ref={password}
+          type="password"
+          className="px-4 p-2 my-4  w-full bg-gray-800 rounded-lg"
+          placeholder="Password"
+        ></input>
+        <button
+          className="bg-red-700 p-2 my-6 w-full rounded-lg"
+          onClick={() => handleSubmit()}
+        >
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </button>
+        <p>
+          {isSignInForm ? "New to Netflix? " : " Already a member? "}
+          <Link
+            className="underline"
             onClick={() => {
-              handleSignUp();
+              toggleToSignUp();
             }}
           >
-            Sign Up
-          </button>
-          <p>
-            Already a member?{" "}
-            <Link
-              className="underline"
-              onClick={() => {
-                toggleToSignUp();
-                setErrorMessage(null);
-              }}
-            >
-              Sign in now.
-            </Link>
-          </p>
-        </form>
-      )}
+            {isSignInForm ? "Sign up now." : "Sign in now."}
+          </Link>
+        </p>
+      </form>
     </div>
   );
 };
