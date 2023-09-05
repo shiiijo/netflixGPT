@@ -2,6 +2,11 @@ import React from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import { validateFormData } from "../utils/validate.js";
+import { auth } from "../utils/firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = React.useState(true);
@@ -14,19 +19,52 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // data validation
     const validationMessage = validateFormData(
       email.current.value,
       password.current.value
     );
-    console.log(validationMessage);
     if (validationMessage !== "ok") {
       setErrorMessage(validationMessage);
-    } else {
-      setErrorMessage(null);
+      return;
     }
-    //sign-in & sign-up
+    setErrorMessage(null);
+    if (!isSignInForm) {
+      //sign-up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          setErrorMessage(errorMessage);
+        });
+    } else {
+      //sign-in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          setErrorMessage(errorMessage);
+        });
+    }
   };
 
   return (
@@ -79,6 +117,7 @@ const Login = () => {
             className="underline"
             onClick={() => {
               toggleToSignUp();
+              setErrorMessage(null);
             }}
           >
             {isSignInForm ? "Sign up now." : "Sign in now."}
