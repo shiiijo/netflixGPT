@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validateFormData } from "../utils/validate.js";
 import { auth } from "../utils/firebase.js";
 import {
@@ -14,6 +14,7 @@ const Login = () => {
   const name = React.useRef(null);
   const email = React.useRef(null);
   const password = React.useRef(null);
+  const navigate = useNavigate();
 
   const toggleToSignUp = () => {
     setIsSignInForm(!isSignInForm);
@@ -39,7 +40,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -56,7 +57,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;

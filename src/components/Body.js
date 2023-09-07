@@ -2,11 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Login from "./Login";
 import Browse from "./Browse";
-import {
-  RouterProvider,
-  createBrowserRouter,
-  useNavigate,
-} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase.js";
 import { useDispatch } from "react-redux";
@@ -14,7 +10,6 @@ import { addUser, removeUser } from "../utils/userSlice";
 
 const Body = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const appRouter = createBrowserRouter([
     {
@@ -44,11 +39,9 @@ const Body = () => {
             phoneNumber: phoneNumber,
           })
         );
-        navigate("/browse");
       } else {
         // User is signed out
         dispatch(removeUser());
-        navigate("/");
       }
     });
   }, []);
