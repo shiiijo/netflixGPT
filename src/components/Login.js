@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR, LOGIN_BG } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = React.useState(true);
@@ -45,8 +46,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
-            photoURL:
-              "https://avatars.githubusercontent.com/u/68919917?s=400&u=8963cbbd9fdd7d18f66b9f64564cc97346cc3e30&v=4",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               dispatch(
@@ -90,11 +90,7 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4f-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/IN-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-        alt="logo"
-        className="absolute"
-      />
+      <img src={LOGIN_BG} alt="bg" className="absolute" />
       <form
         className="bg-black absolute p-12 text-white bg-opacity-80 mx-auto right-0 left-0 my-36 w-1/4 rounded-md"
         onSubmit={(e) => {
