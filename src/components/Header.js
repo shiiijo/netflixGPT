@@ -51,7 +51,7 @@ const Header = () => {
     <div className="absolute bg-gradient-to-b from-black  px-8 z-10 w-screen flex justify-between">
       <img className="w-56" src={LOGO} />
       {user && (
-        <div className="pt-7">
+        <div className="pt-7 text-white">
           <img src={user.photoURL} />
           <p className="">{user.displayName}</p>
           <button className="pt-2" onClick={() => handleSignOut()}>

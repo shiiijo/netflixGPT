@@ -3,7 +3,7 @@ import { Play, Info } from "lucide-react";
 
 const BrowseVidTitle = ({ title, overview }) => {
   return (
-    <div className="pt-96 px-8">
+    <div className="absolute top-96 left-0 z-20 px-20 bg-gradient-to-r from-black w-screen aspect-video">
       <h1 className="text-5xl font-semibold py-4 text-white">{title}</h1>
       <p className="w-1/4 text-white text-xl">{overview}</p>
       <div className="flex flex-row mt-10">

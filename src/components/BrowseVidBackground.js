@@ -4,7 +4,7 @@ import { API_OPTNS } from "../utils/constants";
 const BrowseVidBackground = ({ id }) => {
   const [videokey, setVideoKey] = React.useState(null);
 
-  const getBackgroundVideo = async (videoId) => {
+  const getBackgroundVideo = async () => {
     const data = await fetch(
       `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
       API_OPTNS
@@ -23,11 +23,10 @@ const BrowseVidBackground = ({ id }) => {
   }, []);
 
   return (
-    <div className="absolute top-40 left-0 -z-20">
+    <div className="">
       <iframe
-        height={700}
-        width={1900}
-        src={`https://www.youtube.com/embed/${videokey}`}
+        className="w-screen aspect-video"
+        src={`https://www.youtube.com/embed/${videokey}?autoplay=1&rel=0&mute=1&controls=0&modestbranding=1&loop=&showinfo=0`}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
