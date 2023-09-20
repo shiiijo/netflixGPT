@@ -3,6 +3,8 @@ import Header from "./Header";
 import { API_OPTNS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/movieSlice";
+import MainContainer from "./MainContainer";
+import SubContainer from "./SubContainer";
 
 const Browse = () => {
   const dispatch = useDispatch();
@@ -13,7 +15,6 @@ const Browse = () => {
       API_OPTNS
     );
     const data = await json.json();
-    console.log(data?.results);
     dispatch(addNowPlayingMovies(data.results));
   };
 
@@ -24,6 +25,8 @@ const Browse = () => {
   return (
     <div>
       <Header />
+      <MainContainer />
+      <SubContainer />
     </div>
   );
 };
