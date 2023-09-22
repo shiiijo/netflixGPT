@@ -8,10 +8,10 @@ const BrowseVidTitle = ({ title, overview }) => {
       <p className="w-1/4 text-white text-xl">{overview}</p>
       <div className="flex flex-row mt-10">
         <button className="font-bold bg-white text-center p-2 rounded-md mr-2 flex flex-row">
-          <Play className="mr-1" /> Play
+         ▶️ Play
         </button>
         <button className="font-bold bg-slate-500 text-center p-2 bg-opacity-60 rounded-md flex flex-row text-white">
-          <Info className="mr-1" /> More info
+          <Info className="mr-1 h-6" /> More info
         </button>
       </div>
     </div>
