@@ -3,24 +3,28 @@ import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
 
 const SubContainer = () => {
-  const movies = useSelector((store) => store.movies?.nowPlaying);
+  const nowPlayingmovies = useSelector((store) => store.movies?.nowPlaying);
+  const upComingMovies = useSelector((store) => store.movies?.upComing);
+  const popularMovies = useSelector((store) => store.movies?.popular);
+  const topRatedMovies = useSelector((store) => store.movies?.topRated);
 
-  if (!movies) return null;
+  if (!nowPlayingmovies || !upComingMovies || !popularMovies || !topRatedMovies)
+    return null;
 
   return (
     <div className="bg-black">
-      <div className="relative -mt-64 z-30">
-        <MovieList title={"Now Playing"} movies={movies} />
+      <div className="relative -mt-60 z-30">
+        <MovieList title={"Now Playing"} movies={nowPlayingmovies} />
       </div>
-      <MovieList title={"Only on Netflix"} movies={movies} />
-      <MovieList title={"Crime TV Dramas"} movies={movies} />
-      <MovieList title={"Scary TV Shows"} movies={movies} />
-      <MovieList title={"Real Stories"} movies={movies} />
-      <MovieList title={"Bollywood"} movies={movies} />
-      <MovieList title={"Horror Movies"} movies={movies} />
-      <MovieList title={"Binge Worthy"} movies={movies} />
-      <MovieList title={"Comedy Dramas"} movies={movies} />
-      <MovieList title={"Documenteries"} movies={movies} />
+      <MovieList title={"Only on Netflix"} movies={upComingMovies} />
+      <MovieList title={"Crime TV Dramas"} movies={popularMovies} />
+      <MovieList title={"Scary TV Shows"} movies={topRatedMovies} />
+      <MovieList title={"Real Stories"} movies={upComingMovies} />
+      <MovieList title={"Bollywood"} movies={popularMovies} />
+      <MovieList title={"Horror Movies"} movies={topRatedMovies} />
+      <MovieList title={"Binge Worthy"} movies={nowPlayingmovies} />
+      <MovieList title={"Comedy Dramas"} movies={topRatedMovies} />
+      <MovieList title={"Documenteries"} movies={popularMovies} />
     </div>
   );
 };
