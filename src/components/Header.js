@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { LOGO } from "../utils/constants";
+import { toggleGptSearch } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,6 +20,10 @@ const Header = () => {
       .catch((error) => {
         navigate("/error");
       });
+  };
+
+  const handleGptSearch = () => {
+    dispatch(toggleGptSearch());
   };
 
   React.useEffect(() => {
@@ -49,14 +54,22 @@ const Header = () => {
 
   return (
     <div className="absolute bg-gradient-to-b from-black  px-8 z-30 w-screen flex justify-between">
-      <img className="w-56" src={LOGO} />
+      <img className="w-56 cursor-pointer" src={LOGO} />
       {user && (
-        <div className="pt-7 text-white">
-          <img src={user.photoURL} />
-          <p className="">{user.displayName}</p>
-          <button className="pt-2" onClick={() => handleSignOut()}>
-            Sign Out
+        <div className="flex">
+          <button
+            className="bg-purple-800 p-2 m-14 h-10 rounded-lg text-white"
+            onClick={handleGptSearch}
+          >
+            GPT Search
           </button>
+          <div className="pt-7 text-white">
+            <img src={user.photoURL} />
+            <p className="">{user.displayName}</p>
+            <button className="pt-2" onClick={() => handleSignOut()}>
+              Sign Out
+            </button>
+          </div>
         </div>
       )}
     </div>

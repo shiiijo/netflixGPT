@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import { API_OPTNS } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addNowPlayingMovies,
   addPopularMovies,
@@ -10,9 +10,11 @@ import {
 } from "../utils/movieSlice";
 import MainContainer from "./MainContainer";
 import SubContainer from "./SubContainer";
+import GptSearch from "./GptSearch";
 
 const Browse = () => {
   const dispatch = useDispatch();
+  const isGptEnabled = useSelector((store) => store.gpt.isGptEnabled);
 
   const getNowPlayingMovies = async () => {
     const json = await fetch(
@@ -60,8 +62,14 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SubContainer />
+      {isGptEnabled ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SubContainer />
+        </>
+      )}
     </div>
   );
 };
