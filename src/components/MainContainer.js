@@ -9,7 +9,6 @@ const MainContainer = () => {
   if (!movies) return null;
 
   const recommendedMovie = movies[0];
-  console.log(recommendedMovie);
 
   const { title, overview, id } = recommendedMovie;
 

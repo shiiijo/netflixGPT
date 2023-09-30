@@ -1,7 +1,7 @@
 import React from "react";
 import GptSearchBar from "./GptSearchBar";
 import GptSuggestions from "./GptSuggestions";
-import { USER_AVATAR, LOGIN_BG } from "../utils/constants";
+import { LOGIN_BG } from "../utils/constants";
 
 const GptSearch = () => {
   return (

@@ -13,6 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const isGptEnabled = useSelector((store) => store.gpt.isGptEnabled);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -61,7 +62,7 @@ const Header = () => {
             className="bg-purple-800 p-2 m-14 h-10 rounded-lg text-white"
             onClick={handleGptSearch}
           >
-            GPT Search
+            {isGptEnabled ? "Netflix Browse" : "GPT Search"}
           </button>
           <div className="pt-7 text-white">
             <img src={user.photoURL} />
