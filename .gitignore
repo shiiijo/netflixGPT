@@ -1,6 +1,7 @@
 
 
 .env
+/firebase
 
 # dependencies
 /node_modules

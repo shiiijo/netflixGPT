@@ -14,6 +14,11 @@ import GptSearch from "./GptSearch";
 
 const Browse = () => {
   const dispatch = useDispatch();
+  const nowPlayingMovies = useSelector((store) => store.movies.nowPlaying);
+  const upComingMovies = useSelector((store) => store.movies?.upComing);
+  const popularMovies = useSelector((store) => store.movies?.popular);
+  const topRatedMovies = useSelector((store) => store.movies?.topRated);
+
   const isGptEnabled = useSelector((store) => store.gpt.isGptEnabled);
 
   const getNowPlayingMovies = async () => {
@@ -53,10 +58,11 @@ const Browse = () => {
   };
 
   React.useEffect(() => {
-    getNowPlayingMovies();
-    getUpComingMovies();
-    getPopularMovies();
-    getTopRatedMovies();
+    // used memoization concept here 
+    if (!nowPlayingMovies) getNowPlayingMovies();
+    !upComingMovies && getUpComingMovies();
+    !popularMovies && getPopularMovies();
+    !topRatedMovies && getTopRatedMovies();
   }, []);
 
   return (

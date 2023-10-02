@@ -1,5 +1,6 @@
 import React from "react";
 import { API_OPTNS } from "../utils/constants";
+import { useSelector } from "react-redux";
 
 const BrowseVidBackground = ({ id }) => {
   const [videokey, setVideoKey] = React.useState(null);
