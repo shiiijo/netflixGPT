@@ -16,7 +16,7 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="pt-[9%] px-[25%]">
+    <div className="md:pt-[9%] pt-[68%] md:px-[25%] px-0">
       <form
         className="text-center bg-black rounded-lg bg-opacity-60"
         onSubmit={(e) => {
@@ -24,7 +24,7 @@ const GptSearchBar = () => {
         }}
       >
         <input
-          className="border border-stone-900 p-2 m-2 w-1/2 rounded-xl"
+          className="border border-stone-900 p-2 m-2 md:w-1/2 w-3/4 rounded-xl"
           type="text"
           placeholder="What would you like to watch today?"
           ref={searchText}

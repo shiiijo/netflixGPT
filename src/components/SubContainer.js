@@ -12,7 +12,7 @@ const SubContainer = () => {
     return null;
 
   return (
-    <div className="bg-black">
+    <div className="bg-black pt-[125%] md:pt-0">
       <div className="relative -mt-60 z-30">
         <MovieList title={"Now Playing"} movies={nowPlayingmovies} />
       </div>

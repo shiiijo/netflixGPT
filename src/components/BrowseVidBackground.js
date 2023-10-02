@@ -24,7 +24,7 @@ const BrowseVidBackground = ({ id }) => {
   }, []);
 
   return (
-    <div className="">
+    <div className="pt-[65%] md:pt-0">
       <iframe
         className="w-screen aspect-video"
         src={`https://www.youtube.com/embed/${videokey}?autoplay=1&rel=0&mute=1&controls=0&modestbranding=1&loop=0&showinfo=0`}

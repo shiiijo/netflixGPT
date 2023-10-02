@@ -54,18 +54,18 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute bg-gradient-to-b from-black  px-8 z-30 w-screen flex justify-between">
-      <img className="w-56 cursor-pointer" src={LOGO} />
+    <div className="flex-col md:flex-row  absolute bg-gradient-to-b from-black  px-8 z-30 w-screen flex justify-between">
+      <img className="w-56 cursor-pointer mx-auto md:mx-0" src={LOGO} />
       {user && (
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           <button
-            className="bg-purple-800 p-2 m-14 h-10 rounded-lg text-white"
+            className="bg-purple-800 p-2  h-18 rounded-lg text-white w-36 md:w-18 mx-auto md:m-14"
             onClick={handleGptSearch}
           >
             {isGptEnabled ? "Netflix Browse" : "GPT Search"}
           </button>
-          <div className="pt-7 text-white">
-            <img src={user.photoURL} />
+          <div className="pt-7 text-white mx-auto">
+            <img className="mx-auto" src={user.photoURL} />
             <p className="">{user.displayName}</p>
             <button className="pt-2" onClick={() => handleSignOut()}>
               Sign Out
