@@ -21,14 +21,16 @@ const GptSearchBar = () => {
         return element.trim();
       });
 
-    console.log(gptSuggestionsArray);
-
     const tmdbSuggestionsPromiseArray = gptSuggestionsArray.map((movie) =>
       searchTmdbMovies(movie)
     );
     const tmdbSuggestionsArray = await Promise.all(tmdbSuggestionsPromiseArray);
-    console.log(tmdbSuggestionsArray);
-    dispatch(addGptSuggestions(tmdbSuggestionsArray));
+    dispatch(
+      addGptSuggestions({
+        suggestions: tmdbSuggestionsArray,
+        movieKeywords: gptSuggestionsArray,
+      })
+    );
   };
 
   const searchTmdbMovies = async (movie) => {

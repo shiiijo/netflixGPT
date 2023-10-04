@@ -9,15 +9,10 @@
 5. Login / Signup page
 6. form validation using useRef() hook
 
-
-
 to-do:
 
 add multi language feature using react redux
- - create new slice(app config)
 
-use gpt api to get the movie results & each movie details by using tmdb api
- - store results in redux
- - use existing movieList component to show gpt results
+- create new slice(app config)
 
 use tmdb api to preview movie details with trailer after clicking movie poster

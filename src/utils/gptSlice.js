@@ -5,13 +5,15 @@ const gptSlice = createSlice({
   initialState: {
     isGptEnabled: false,
     gptSuggestions: null,
+    movieKeywords: null,
   },
   reducers: {
     toggleGptSearch: (state) => {
       state.isGptEnabled = !state.isGptEnabled;
     },
     addGptSuggestions: (state, action) => {
-      state.gptSuggestions = action.payload;
+      state.gptSuggestions = action.payload.suggestions;
+      state.movieKeywords = action.payload.movieKeywords
     },
   },
 });
