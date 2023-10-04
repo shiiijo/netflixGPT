@@ -1,9 +1,12 @@
 import React from "react";
 import openai from "../utils/openai";
+import { API_OPTNS } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addGptSuggestions } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   const searchText = React.useRef(null);
-
+  const dispatch = useDispatch();
   const handleGptSerach = async () => {
     const query = `Act as a movie recomendation system & suggest 5 movies for the query ${searchText.current.value} and give only names of movies as comma seperated.`;
 
@@ -12,7 +15,28 @@ const GptSearchBar = () => {
       model: "gpt-3.5-turbo",
     });
 
-    console.log(results.choices);
+    const gptSuggestionsArray = results.choices[0].message.content
+      .split(",")
+      .map((element) => {
+        return element.trim();
+      });
+
+    console.log(gptSuggestionsArray);
+
+    const tmdbSuggestionsPromiseArray = gptSuggestionsArray.map((movie) =>
+      searchTmdbMovies(movie)
+    );
+    const tmdbSuggestionsArray = await Promise.all(tmdbSuggestionsPromiseArray);
+    console.log(tmdbSuggestionsArray);
+    dispatch(addGptSuggestions(tmdbSuggestionsArray));
+  };
+
+  const searchTmdbMovies = async (movie) => {
+    const json = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${movie}`,
+      API_OPTNS
+    );
+    return await json.json();
   };
 
   return (
