@@ -3,11 +3,14 @@ import openai from "../utils/openai";
 import { API_OPTNS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addGptSuggestions } from "../utils/gptSlice";
+import ReactLoading from "react-loading";
 
 const GptSearchBar = () => {
   const searchText = React.useRef(null);
   const dispatch = useDispatch();
+  const [gptSuggestions, setGptSuggestions] = React.useState("NA");
   const handleGptSerach = async () => {
+    setGptSuggestions("running");
     const query = `Act as a movie recomendation system & suggest 5 movies for the query ${searchText.current.value} and give only names of movies as comma seperated.`;
 
     const results = await openai.chat.completions.create({
@@ -25,6 +28,7 @@ const GptSearchBar = () => {
       searchTmdbMovies(movie)
     );
     const tmdbSuggestionsArray = await Promise.all(tmdbSuggestionsPromiseArray);
+    setGptSuggestions(tmdbSuggestionsArray);
     dispatch(
       addGptSuggestions({
         suggestions: tmdbSuggestionsArray,
@@ -62,6 +66,15 @@ const GptSearchBar = () => {
           Search
         </button>
       </form>
+      {gptSuggestions === "running" && (
+        <ReactLoading
+          className="m-auto mt-24"
+          type="bars"
+          color="white"
+          height={300}
+          width={150}
+        />
+      )}
     </div>
   );
 };
